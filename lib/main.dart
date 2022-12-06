@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -12,13 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.dark(),
       home: const MyHomePage(),
     );
   }
 }
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -26,12 +27,37 @@ class MyHomePage extends StatelessWidget {
     const String slackToken = 'xoxb-3410044109703-4377880182321-uHUYYQK64IYaEux9Hwb39Jtq';
     var slackUri = Uri.parse('https://hooks.slack.com/services/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');
 
+    var now = DateTime.now();
+    var formatedNow = '${now.year}/${now.month}/${now.day}　${now.hour}:${now.minute}';
+
     Map<String, Object> data = {
-      'channel': 'slack-me',
-      'text': '【要対応！】\nお客さんが来ています！！',
-      'user_name': '来客通知BOT',
-      'icon_emoji': 'dog',
-      'link_names': 1
+      'blocks': [
+        {
+          "type": "header",
+          "text": {
+            "type": "plain_text",
+            "text": "要対応!",
+            "emoji": true
+          }
+        },
+        {
+          'type': "section",
+          'text': {
+            'type': 'mrkdwn',
+            'text': '玄関にお客さんが来ています!! :man-running: :dash: :dash: :dash: @here'
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "text": formatedNow,
+              "emoji": true
+            }
+          ]
+        },
+      ]
     };
 
     final http.Response response = await http.post(
@@ -43,6 +69,8 @@ class MyHomePage extends StatelessWidget {
       body: json.encode(data)
     );
     print(response);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
 
     // var response = await http.post(slackUri,
     // headers: {'Content-Type': "application/json"},
@@ -56,7 +84,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('http Example'),
+        title: const Text('インターホン'),
       ),
       body: Center(
         child: ElevatedButton(

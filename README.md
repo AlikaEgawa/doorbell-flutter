@@ -1,8 +1,18 @@
-# ipadflutter
+# 来客通知アプリ
+
+・[画面設計図](https://docs.google.com/spreadsheets/d/1f-qQd9-dVuSwb7NoQzk1K0X6ATiC9Bda2z_jbpyZRDQ/edit?usp=sharing)
+
+・[SlackAPIドキュメント](https://api.slack.com/messaging/webhooks)
+
+<br>
+<br>
+<br>
+
+## Flutter
 
 A new Flutter project.
 
-## Getting Started
+### Getting Started
 
 This project is a starting point for a Flutter application.
 
