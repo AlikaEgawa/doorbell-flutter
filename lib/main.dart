@@ -10,68 +10,59 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Sample',
-      home: MyHomePage(title: 'Flutter Sample'),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
     );
   }
 }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  void _callAPI() async {
+    const String slackToken = 'xoxb-3410044109703-4377880182321-uHUYYQK64IYaEux9Hwb39Jtq';
+    var slackUri = Uri.parse('https://hooks.slack.com/services/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');
 
-  final String title;
+    Map<String, Object> data = {
+      'channel': 'slack-me',
+      'text': '【要対応！】\nお客さんが来ています！！',
+      'user_name': '来客通知BOT',
+      'icon_emoji': 'dog',
+      'link_names': 1
+    };
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+    final http.Response response = await http.post(
+      slackUri,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $slackToken",
+      },
+      body: json.encode(data)
+    );
+    print(response);
 
-class _MyHomePageState extends State<MyHomePage> {
-  List items = [];
-
-  Future<void> getData() async {
-    var response = await http.get(Uri.https(
-        'www.googleapis.com',
-        '/books/v1/volumes',
-        {'q': '{Flutter}', 'maxResults': '40', 'langRestrict': 'ja'}));
-
-    var jsonResponse = jsonDecode(response.body);
-
-    setState(() {
-      items = jsonResponse['items'];
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    getData();
+    // var response = await http.post(slackUri,
+    // headers: {'Content-Type': "application/json"},
+    // body: json.encode(request.toJson())
+    // );
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Sample'),
+        title: const Text('http Example'),
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  leading: Image.network(
-                    items[index]['volumeInfo']['imageLinks']['thumbnail'],
-                  ),
-                  title: Text(items[index]['volumeInfo']['title']),
-                  subtitle: Text(items[index]['volumeInfo']['publishedDate']),
-                ),
-              ],
-            ),
-          );
-        },
+      body: Center(
+        child: ElevatedButton(
+          onPressed: _callAPI,
+          child: const Text('Call API'),
+        ),
       ),
     );
   }
