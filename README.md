@@ -1,5 +1,7 @@
 # 来客通知アプリ
 
+・[XD](https://xd.adobe.com/view/4fc8968e-cfe7-4812-8ea3-e77438c0f483-1a9b/)
+
 ・[画面設計図](https://docs.google.com/spreadsheets/d/1f-qQd9-dVuSwb7NoQzk1K0X6ATiC9Bda2z_jbpyZRDQ/edit?usp=sharing)
 
 ・[SlackAPIドキュメント](https://api.slack.com/messaging/webhooks)

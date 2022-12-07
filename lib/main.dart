@@ -24,8 +24,8 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   void _callAPI() async {
-    const String slackToken = 'xoxb-3410044109703-4377880182321-uHUYYQK64IYaEux9Hwb39Jtq';
-    var slackUri = Uri.parse('https://hooks.slack.com/services/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');
+    const String slackToken = 'xoxb-3410044109703-4377880182321-URa5iL6oRRbchpjSdZX1LywH';
+    var slackUri = Uri.parse('https://hooks.slack.com/services/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');
 
     var now = DateTime.now();
     var formatedNow = '${now.year}/${now.month}/${now.day}　${now.hour}:${now.minute}';
@@ -71,27 +71,44 @@ class MyHomePage extends StatelessWidget {
     print(response);
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
-
-    // var response = await http.post(slackUri,
-    // headers: {'Content-Type': "application/json"},
-    // body: json.encode(request.toJson())
-    // );
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
   }
 
   @override
   Widget build(BuildContext context) {
+    final double devideHeight = MediaQuery.of(context).size.height; //デバイスサイズを定義
     return Scaffold(
       appBar: AppBar(
-        title: const Text('インターホン'),
+        title: const Text('Door Bell App'),
+        centerTitle: true,
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: _callAPI,
-          child: const Text('Call API'),
+        child: Column(
+          children: [
+            SizedBox(
+              height: devideHeight * 0.1,
+              child: const Text('いらっしゃいませ'),
+            ),
+            Container(
+              height: devideHeight * 0.3,
+              color: Colors.green,
+            ),
+            Container(
+              height: devideHeight * 0.3,
+              color: Colors.red,
+            )
+          ],
         ),
       ),
+      // body: Column(
+      //   children: [
+      //     Center(
+      //       child: ElevatedButton(
+      //         onPressed: _callAPI,
+      //         child: const Text('Call API'),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
