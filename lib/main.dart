@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print, unused_element
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import 'next_page.dart';
+import 'second_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,7 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/second': (context) => SecondRoute(),
+      },
     );
   }
 }
@@ -80,10 +86,7 @@ class MyHomePage extends StatelessWidget {
               ElevatedButton(
                 onPressed: (){
                   // FocusScope.of(context).unfocus();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SecondRoute())
-                  );
+                  Navigator.pushNamed(context, '/second');
                 },
                 child: const Text('呼び出す')
               ),

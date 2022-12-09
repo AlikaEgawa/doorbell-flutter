@@ -14,6 +14,18 @@ class SecondRoute extends StatelessWidget {
       body: Container(
         height: double.infinity,
         color: Colors.red,
+        child: Center(
+          child: ElevatedButton(
+            onPressed: (){
+              // FocusScope.of(context).unfocus();
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => SecondRoute())
+              );
+            },
+          child: const Text('戻る')
+          ),
+        ),
       ),
     );
   }
