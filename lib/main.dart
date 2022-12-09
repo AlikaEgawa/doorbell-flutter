@@ -1,9 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+import 'next_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,9 +26,6 @@ class MyHomePage extends StatelessWidget {
     const String slackToken = 'xoxb-3410044109703-4377880182321-URa5iL6oRRbchpjSdZX1LywH';
     var slackUri = Uri.parse('https://hooks.slack.com/services/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');
 
-    var now = DateTime.now();
-    var formatedNow = '${now.year}/${now.month}/${now.day}　${now.hour}:${now.minute}';
-
     Map<String, Object> data = {
       'blocks': [
         {
@@ -46,16 +42,6 @@ class MyHomePage extends StatelessWidget {
             'type': 'mrkdwn',
             'text': '玄関にお客さんが来ています!! :man-running: :dash: :dash: :dash: @here'
           }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "plain_text",
-              "text": formatedNow,
-              "emoji": true
-            }
-          ]
         },
       ]
     };
@@ -75,40 +61,37 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double devideHeight = MediaQuery.of(context).size.height; //デバイスサイズを定義
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Door Bell App'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: devideHeight * 0.1,
-              child: const Text('いらっしゃいませ'),
-            ),
-            Container(
-              height: devideHeight * 0.3,
-              color: Colors.green,
-            ),
-            Container(
-              height: devideHeight * 0.3,
-              color: Colors.red,
-            )
-          ],
+    // final double devideHeight = MediaQuery.of(context).size.height; //デバイスサイズを定義
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Door Bell App'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              const Text('ECNへようこそ'),
+              const Text('御用の方は「呼び出す」をタッチしてください'),
+              // const TextField(),
+              ElevatedButton(
+                onPressed: (){
+                  // FocusScope.of(context).unfocus();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SecondRoute())
+                  );
+                },
+                child: const Text('呼び出す')
+              ),
+              // ElevatedButton(onPressed: _callAPI, child: const Text('Call API'))
+            ],
+          ),
         ),
       ),
-      // body: Column(
-      //   children: [
-      //     Center(
-      //       child: ElevatedButton(
-      //         onPressed: _callAPI,
-      //         child: const Text('Call API'),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
