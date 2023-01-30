@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'second_page.dart';
+import 'next_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ECN 受付アプリ',
       theme: ThemeData.dark(),
       home: const MyHomePage(),
     );
@@ -20,36 +19,59 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
+  static String nameText = '';
+  static String conText = '';
+
   @override
   Widget build(BuildContext context) {
-    // final double devideHeight = MediaQuery.of(context).size.height; //デバイスサイズを定義
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Door Bell App'),
+          title: const Text('ECN受付システム'),
           centerTitle: true,
         ),
         body: Center(
           child: Column(
-            children: [
-              const Text('ECNへようこそ'),
-              const Text('御用の方は「呼び出す」をタッチしてください'),
-              // const TextField(),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: const <Widget>[
+                  Text('ECNへようこそ'),
+                  Text('御用の方は要件を入力し「次へ」をタッチしてください'),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children:  <Widget>[
+                    const Text('お名前'),
+                    TextField(
+                      onChanged: (text) {
+                        nameText = text;
+                      },
+                    ),
+                    const Text('ご用件'),
+                    TextField(
+                      onChanged: (value) {
+                        conText = value;
+                      },
+                    )
+                  ],
+                ),
+              ),
               ElevatedButton(
-                onPressed: (){
-                  // FocusScope.of(context).unfocus();
+                onPressed: () { 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SecondRoute())
+                      builder: (context) => NextPage(nameText, conText)),
                   );
                 },
-                child: const Text('呼び出す')
+                child: const Text('次へ')
               ),
-              // ElevatedButton(onPressed: _callAPI, child: const Text('Call API'))
             ],
           ),
         ),
@@ -57,3 +79,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+

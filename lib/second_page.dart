@@ -82,7 +82,11 @@ class SecondRoute extends StatelessWidget {
                     const Text('お名前'),
                     const TextField(),
                     const Text('ご用件'),
-                    const TextField(),
+                    const TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none
+                      ),
+                    ),
                     ElevatedButton(
                       onPressed: (){
                         _callAPI();
