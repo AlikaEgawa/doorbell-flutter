@@ -18,17 +18,39 @@ class ThirdRoute extends StatelessWidget {
           children: [
             Column(
               children: const [
-                Text('呼び出し中です。お掛けになってお待ちください'),
+                Text(
+                  '呼び出し中です。\nお掛けになってお待ちください',
+                  style: TextStyle(
+                    fontSize: 40
+                  ),
+                ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyApp())
-                );
-              },
-              child: const Text('TOPへ戻る'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(300, 40, 0, 0),
+              child: SizedBox(
+                width: 200,
+                height: 62,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MyApp())
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.grey,
+                    ),
+                  child: const Text(
+                    'TOPへ戻る',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),

@@ -54,9 +54,6 @@ class NextPage extends StatelessWidget {
       },
       body: json.encode(data)
     );
-    print(response);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
   }
 
 
@@ -64,31 +61,84 @@ class NextPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('確認画面'),
+        title: const Text('確認'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
             Column(
               children: [
-                const Text('お名前'),
-                Text('$nameさま'),
-                const Text('ご用件'),
-                Text(content)
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 400, 30),
+                  child: Text(
+                    'お名前',
+                    style: 
+                      TextStyle(
+                        fontSize: 30,
+                      ),
+                  ),
+                ),
+                SizedBox(
+                  width: 500,
+                  child: Text(
+                    '$nameさま',
+                    style: const TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 400, 10),
+                  child: Text(
+                    'ご用件',
+                    style: TextStyle(
+                      fontSize: 30
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 500,
+                  child: Text(
+                    content,
+                    style: const TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                )
               ],
             ),
-              ElevatedButton(
-                onPressed: () {
-                  _callAPI();
-                  FocusScope.of(context).unfocus();
-                    Navigator.push(
-                      context,
-                        MaterialPageRoute(
-                          builder: (context) => ThirdRoute())
-                    );
-                },
-                child: const Text('呼び出す')
+              Padding(
+                padding: const EdgeInsets.fromLTRB(300, 40, 0, 0),
+                child: SizedBox(
+                  width: 200,
+                  height: 62,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _callAPI();
+                      FocusScope.of(context).unfocus();
+                        Navigator.push(
+                          context,
+                            MaterialPageRoute(
+                              builder: (context) => ThirdRoute())
+                        );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                    ),
+                    child: const Text(
+                      '呼び出す',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ),
+                ),
               ),
           ],
         )
