@@ -27,7 +27,7 @@ class ThirdRoute extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(300, 40, 0, 0),
+              padding: const EdgeInsets.fromLTRB(300, 240, 0, 0),
               child: SizedBox(
                 width: 200,
                 height: 62,

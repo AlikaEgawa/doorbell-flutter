@@ -24,6 +24,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -80,15 +81,24 @@ class MyHomePage extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 500,
-                      child: TextField(
-                        onChanged: (text) {
-                          nameText = text;
-                        },
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "例）○○エンジニアリング　田中太郎",
-                          labelStyle: TextStyle(
-                            fontSize: 20,
+                      child: Form(
+                        key: formKey,
+                        child: TextFormField(
+                          validator: (text) {
+                            if (text == null || text.isEmpty) {
+                              return '名前は必ず入力してください';
+                            }
+                            return null;
+                          },
+                          onChanged: (text) {
+                            nameText = text;
+                          },
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "例）○○エンジニアリング　田中太郎",
+                            labelStyle: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -134,11 +144,13 @@ class MyHomePage extends StatelessWidget {
                   height: 62,
                   child: ElevatedButton(
                     onPressed: () { 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NextPage(nameText, conText)),
-                      );
+                      if (formKey.currentState!.validate()){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NextPage(nameText, conText)),
+                        );
+                      }
                     },
                     child: const Text(
                       '次へ',

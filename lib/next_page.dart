@@ -105,14 +105,14 @@ class NextPage extends StatelessWidget {
                   child: Text(
                     content,
                     style: const TextStyle(
-                      fontSize: 40,
+                      fontSize: 35,
                     ),
                   ),
                 )
               ],
             ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(300, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(300, 100, 0, 0),
                 child: SizedBox(
                   width: 200,
                   height: 62,
