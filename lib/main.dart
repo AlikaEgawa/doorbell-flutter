@@ -119,7 +119,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 500,
-                        child: TextField(
+                        child: TextFormField(
                           onChanged: (value) {
                             conText = value;
                           },

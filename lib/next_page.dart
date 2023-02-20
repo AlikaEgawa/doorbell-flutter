@@ -9,11 +9,11 @@ class NextPage extends StatelessWidget {
   final String content;
   const NextPage(this.name, this.content, {super.key});
 
+  static String webhookURL = "https://hooks.slack.com/services/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";
+
   void _callAPI() async {
-    // const String slackToken = 'xoxb-3410044109703-4377880182321-URa5iL6oRRbchpjSdZX1LywH';
-    // var slackUri = Uri.parse('https://hooks.slack.com/services/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');
-    const String slackToken = 'xoxb-3410044109703-4836580311888-if9vTjnqwNX4JysYniqXUbKO';
-    var slackUri = Uri.parse('https://hooks.slack.com/services/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');
+    const String slackToken = "xoxb-3614675099-4848667389216-LQBkheBpOfr2egTMiUVbXgXu";
+    var slackUri = Uri.parse(webhookURL);
 
     Map<String, Object> data = {
       'blocks': [
