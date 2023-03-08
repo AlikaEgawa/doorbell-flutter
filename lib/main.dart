@@ -42,7 +42,7 @@ class MyHomePage extends StatelessWidget {
                 Column(
                   children: const <Widget>[
                     Text(
-                      'ECNへようこそ',
+                      '受付へようこそ',
                       style: TextStyle(
                         fontSize: 72,
                         fontWeight: FontWeight.bold,
